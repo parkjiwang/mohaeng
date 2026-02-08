@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 function isLoggedIn(req: NextRequest) {
-  return req.cookies.get("moheng_logged_in")?.value === "1";
   const hasAccessToken = Boolean(req.cookies.get("moheng_access_token")?.value);
   const hasLegacyFlag = req.cookies.get("moheng_logged_in")?.value === "1";
 
