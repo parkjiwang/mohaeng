@@ -34,3 +34,41 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Auth / DB environment variables
+
+Create `.env.local` with values below for signup/login:
+
+```bash
+JWT_SECRET=your-long-random-secret
+MYSQL_HOST=127.0.0.1
+MYSQL_PORT=3306
+MYSQL_USER=root
+MYSQL_PASSWORD=your-password
+MYSQL_DATABASE=mohaeng
+```
+
+Expected MySQL table (`USER`):
+
+```sql
+CREATE TABLE `USER` (
+  USER_ID BIGINT AUTO_INCREMENT PRIMARY KEY,
+  EMAIL VARCHAR(100) NOT NULL UNIQUE,
+  USER_PWD VARCHAR(255) NULL,
+  NAME VARCHAR(50) NOT NULL,
+  PHONE VARCHAR(20) NULL,
+  PROFILE_IMG VARCHAR(255) NULL,
+  USER_TYPE VARCHAR(20) NOT NULL,
+  BUSINESS_NUM VARCHAR(20) NULL,
+  SIGNUP_TYPE VARCHAR(20) NOT NULL,
+  USER_ROLE VARCHAR(20) NOT NULL,
+  STATUS VARCHAR(20) NOT NULL,
+  CREATED_AT DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UPDATED_AT DATETIME NULL,
+  LAST_LOGIN_AT DATE NOT NULL DEFAULT CURRENT_DATE,
+  WITHREASON_ID INT NULL,
+  WITHDRAWAL_REASON TEXT NULL
+);
+```
+
+Default values used by the app for basic signup: `USER_TYPE=PERSONAL`, `SIGNUP_TYPE=BASIC`, `USER_ROLE=USER`, `STATUS=ACTIVE`.
